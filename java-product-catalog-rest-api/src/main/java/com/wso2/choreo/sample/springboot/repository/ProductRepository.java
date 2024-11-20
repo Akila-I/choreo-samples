@@ -6,9 +6,18 @@ import org.springframework.stereotype.Repository;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 @Repository
 public class ProductRepository {
     private Map<Integer, Product> map = new ConcurrentHashMap<>();
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductRepository.class);
 
     public ProductRepository() {
         map.put(1, new Product(1, "product 1", 10, 1000));
