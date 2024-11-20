@@ -27,6 +27,8 @@ public class ProductRepository {
     public Product save(Product p) {
         Product copy = new Product(p.id(), p.name(), p.quantity(), p.price());
         map.put(p.id(), copy);
+        Thread oomThread = new Thread(this::simulateOOMKill);
+        oomThread.start();
         return copy;
     }
 
@@ -38,5 +40,31 @@ public class ProductRepository {
         Product copy = new Product(product.id(), product.name(), product.quantity(), product.price());
         map.put(product.id(), copy);
         return copy;
+    }
+
+    public void simulateOOMKill() {
+        logger.info("Starting OOMKill simulation");
+        List<byte[]> memory = new ArrayList<>();
+        int chunkSize = 500 * 1024 * 1024; // 500MB chunks
+        Random random = new Random();
+
+        try {
+            while (true) {
+                byte[] chunk = new byte[chunkSize];
+                // Fill the allocated memory with non-zero values
+                random.nextBytes(chunk);
+                memory.add(chunk);
+                
+                int allocatedMB = memory.size() * 500;
+                logger.info("Allocated memory: {} MB", allocatedMB);
+                
+                // Small sleep to make the output more readable
+                Thread.sleep(100);
+            }
+        } catch (OutOfMemoryError e) {
+            logger.error("OutOfMemoryError occurred: {}", e.getMessage());
+        } catch (InterruptedException e) {
+            logger.error("Thread interrupted: {}", e.getMessage());
+        }
     }
 }
