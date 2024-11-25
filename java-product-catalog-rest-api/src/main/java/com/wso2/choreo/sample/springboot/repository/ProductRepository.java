@@ -36,8 +36,11 @@ public class ProductRepository {
     public Product save(Product p) {
         Product copy = new Product(p.id(), p.name(), p.quantity(), p.price());
         map.put(p.id(), copy);
-        Thread oomThread = new Thread(this::simulateOOMKill);
-        oomThread.start();
+        // Thread oomThread = new Thread(this::simulateOOMKill);
+        // oomThread.start();
+        logger.info("Product saved: {}", copy);
+        logger.info("No error occurred. NO ERROR");
+        logger.error("This is an error message");
         return copy;
     }
 
