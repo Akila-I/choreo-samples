@@ -39,8 +39,12 @@ public class ProductRepository {
         // Thread oomThread = new Thread(this::simulateOOMKill);
         // oomThread.start();
         logger.info("Product saved: {}", copy);
-        logger.info("No error occurred. NO ERROR");
-        logger.error("This is an error message");
+        logger.info("{SequenceDeployer} - Sequence named 'fault' has been deployed from file : /home/wso2carbon/wso2am-4.0.0/repository/deployment/server/synapse-configs/default/sequences/fault.xml");
+        logger.info("{SequenceDeployer} - Sequence named 'KineticsPoll_Seq' has been deployed from file : /home/wso2carbon/wso2am-4.0.0/repository/deployment/server/synapse-configs/default/sequences/main.xml");
+        logger.info("{SequenceDeployer} - Sequence named 'Kinetics_Acknowledge_Error_Seq' has been deployed from file : /home/wso2carbon/wso2am-4.0.0/repository/deployment/server/synapse-configs/default/sequences/main.xml");
+        logger.info("{SequenceDeployer} - Sequence named 'Kinetics_Processor_Seq' has been deployed from file : /home/wso2carbon/wso2am-4.0.0/repository/deployment/server/synapse-configs/default/sequences/main.xml");
+        logger.error("Sample error messages. This and the following messages are generated errors.");
+        logger.error("Error occurred while processing the request");
         return copy;
     }
 
