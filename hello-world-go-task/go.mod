@@ -1,3 +1,3 @@
 module ontime
 
-go 1.00
+go 1.1
